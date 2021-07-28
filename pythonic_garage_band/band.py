@@ -11,20 +11,26 @@ from typing import AbstractSet
 
 # Abstract base or super class 
 class Musician(ABC):
-    def __init__(self, name):
-        self.name = name
 
-  
+   
+
+    def __init__(self, name):
+
+        self.name = name
+        #self.__class__.members.append(self) #it will return all the inheritances classes as the value returning fron str
+       # abstract methods to define what this method should do and it will implemented in the inheritant instances not in the class and Abstract classes are not intended to be instantiated meaning we can't make instances from it
+       # in case we do implementation meaning returning values it will be overidden
+       # in case we didn't added to the inherited class and we call it on that class it won't work 
         @abstractmethod        
         def __str__():
                 pass
         @abstractmethod    
         def __repr__():
                 pass
-        @abstractmethod    
+        @abstractstaticmethod    
         def get_instrument():
                 pass
-        @abstractmethod    
+        @abstractstaticmethod    
         def play_solo():
                 pass
   
@@ -44,17 +50,17 @@ class Guitarist(Musician):
     def __repr__(self):
         return (f'Guitarist instance. Name = {self.name}')
     
-    def play_solo(self):
+    @staticmethod
+    def play_solo():
         return ("face melting guitar solo")
-
-    def get_instrument(self):
+    @staticmethod
+    def get_instrument():
         return ('guitar')
     
 
 class Bassist(Musician):
     instrument = 'bass'
    
-     
    
       # instance method
     def __str__(self):
@@ -64,11 +70,15 @@ class Bassist(Musician):
         return (f'Bassist instance. Name = {self.name}')
     
     #static methods
-    def get_instrument(self):
+    @staticmethod
+    def get_instrument():
         return ('bass')
-    
-    def play_solo(self):
+    @staticmethod
+    def play_solo():
         return ("bom bom buh bom")
+
+
+
 
 class Drummer(Musician):
     instrument = 'drums'
@@ -82,29 +92,56 @@ class Drummer(Musician):
         return (f'Drummer instance. Name = {self.name}')
 
     # static methods
-    def play_solo(self):
+    @staticmethod
+    def play_solo():
         return ("rattle boom crash")
-
-    def get_instrument(self):
+    @staticmethod
+    def get_instrument():
         return ('drums')
 
 
 class Band(Musician):
-    #all_members =[]
+    member =[] 
 
-    def __init__(self, name='no one',all_members=[]):
+    def __init__(self, name,members =[]):
         self.name = name
-        self.all_members = all_members
+        self.members = members
         #__class__. to access the variables
-        #self.__class__.all_members.append(self)
+        self.__class__.member.append(self) #it will take all the objects or instances 
 
-# intance methods
+
+    #instance method
+    def play_solos(self):
+        ordered_solos=[]
+        for ele in self.members:
+            result = ele.play_solo()
+            ordered_solos.append(result)
+        return ordered_solos
+
+
+
+    @classmethod
+    def to_list(cls):
+        return cls.member
+
+    
+    def __str__(self):
+        
+        return (f"Our Band name is {self.name}")
+
     def __repr__(self):
-        return f'{self.name}'
+
+        return (f"Band instance. Name = {self.name}")
+
+
+
 if __name__ == '__main__'  :
     dodo = Band('haya')
     nono = Band('ha')
-    print(dodo.all_members)
+    
     print('haya')
     donti = Drummer('joe')
-    print(str(donti))
+    #print(str(donti))
+    pont = Band( 'of',[Drummer('had'),Guitarist('mad')])
+    print(pont)
+    print(Band.members)
