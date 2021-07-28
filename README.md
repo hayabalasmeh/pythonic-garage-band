@@ -2,4 +2,5 @@
 ## Project name : pythonic-garage-band.py
 
 
-## lab 2 PR links:
+## lab 4 PR links:
+# https://github.com/hayabalasmeh/pythonic-garage-band/pull/1
