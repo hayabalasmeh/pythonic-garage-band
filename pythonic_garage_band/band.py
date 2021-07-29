@@ -101,13 +101,13 @@ class Drummer(Musician):
 
 
 class Band(Musician):
-    member =[] 
+    instances =[] 
 
-    def __init__(self, name,members =[]):
+    def __init__(self, name='',members =[]):
         self.name = name
         self.members = members
         #__class__. to access the variables
-        self.__class__.member.append(self) #it will take all the objects or instances 
+        self.__class__.instances.append(self) #it will take all the objects or instances 
 
 
     #instance method
@@ -122,7 +122,7 @@ class Band(Musician):
 
     @classmethod
     def to_list(cls):
-        return cls.member
+        return cls.instances
 
     
     def __str__(self):
@@ -136,12 +136,13 @@ class Band(Musician):
 
 
 if __name__ == '__main__'  :
-    dodo = Band('haya')
+    dodo = Musician('music')
     nono = Band('ha')
     
     print('haya')
     donti = Drummer('joe')
     #print(str(donti))
-    pont = Band( 'of',[Drummer('had'),Guitarist('mad')])
+    pont = Band( 'yahia',[Drummer('had'),Guitarist('mad')])
     print(pont)
-    print(Band.members)
+    print(Band.instances)
+    #print(Band.instances)
