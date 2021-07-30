@@ -60,7 +60,7 @@ class Guitarist(Musician):
 
 class Bassist(Musician):
     instrument = 'bass'
-   
+     
    
       # instance method
     def __str__(self):
@@ -102,12 +102,13 @@ class Drummer(Musician):
 
 class Band(Musician):
     instances =[] 
+#accesing this attrib is done using the __class__ before it inside dunder init or using cls inside the class method
 
     def __init__(self, name='',members =[]):
         self.name = name
         self.members = members
         #__class__. to access the variables
-        self.__class__.instances.append(self) #it will take all the objects or instances 
+        self.__class__.instances.append(self) #it will add the represent value of all the objects or instances 
 
 
     #instance method
@@ -121,6 +122,9 @@ class Band(Musician):
 
 
     @classmethod
+    #as to check how many instances has been created by this class we made it as class method to run using the class but #it can be accessed using instances or class or to empty them using both instance and class
+    # how to make it count the instances by placing them inside the dunder and append the self for represent or the self.name if wanted to printed 
+     
     def to_list(cls):
         return cls.instances
 
@@ -144,5 +148,6 @@ if __name__ == '__main__'  :
     #print(str(donti))
     pont = Band( 'yahia',[Drummer('had'),Guitarist('mad')])
     print(pont)
-    print(Band.instances)
+    pont.instances = []
+    print(pont.instances)
     #print(Band.instances)
